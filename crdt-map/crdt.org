@@ -1,0 +1,54 @@
+* The Problem
+
+CAP
+
++ Consistent databases that don't scale vs.
++ Eventually consistent databases
+
+http://aphyr.com/tags/jepsen
+
+
+[[file:feeling-lucky.jpg]]
+
+
+* Make the Message do the Work
+
++ Replay every event, consumers are system backups
++ Assume events will be repeated and received out of order
++ Side effects can use idempotency to do the right thing during a
+  recovery
+
++ Property assertions
+  : { change: "name", to: "Lang", from: "Martin" }
++ Cons cells (like git commits)
+
+Preserve causality, need a read buffer
+
+
+* CRDTs
+
++ Idempotent, Commutative
++ No Causality, no buffer
+
++ State like a counter
+  : { pos: {a: 2, b: 4}, neg: {a: 1} } => 5
++ Operational like TreeDoc
+
+
+* A Commutative Map
+
++ Last Writer Wins eventually
++ Read the highest value in the meantime
++ Writers in a fixed priority
+
+: { map: "some-map-name",
+:   val: { a: 1, b: 2 },
+:   maj: 11,
+:   min: "some-uuid" }
+
+
+* CRDT Papers and Implementations
+
++ http://pagesperso-systeme.lip6.fr/Marc.Shapiro/papers/RR-6956.pdf
++ http://muratbuffalo.blogspot.com/2013/04/conflict-free-replicated-data-types.html
++ https://github.com/aphyr/meangirls
