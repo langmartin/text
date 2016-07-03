@@ -1,0 +1,60 @@
+* The Paper
+
++ Oleg Kiselyov is a free range computer scientist
++ all of his stuff is super interesting
++ this paper motiviates functional programming by outlining a specific
+  problem with OO and types
+
+http://okmij.org/ftp/Computation/Subtyping/Trouble.html
+
+* The Claim
+:PROPERTIES:
+:data-background: #999999
+:data-background-size: 100px
+:data-background-repeat: true
+:data-background-repeat: true
+:data-background-transition: zoom
+:END:
+
+Two concrete implementations of a common interface can't generally be
+substituted for one another without knowing details of their
+implementation, when code and data are bundled together
+
+* The Setup
+
++ A fairly straightforward Bag interface
++ Operators depending on the public interface for Bag
++ A CSet, which defines =put= to avoid duplicates
+
+* Foo
+
+A function using only the public interface, decides if a + b is
+contained in c.
+
+#+BEGIN_SRC cpp
+  bool foo(const CBag& a, const CBag& b, const CBag& c)
+  {
+    CBag & ab = *(a.clone());     // Clone a to avoid clobbering it
+    ab += b;                      // ab is now the union of a and b
+    bool result = ab <= c;
+    delete &ab;
+    return result;
+  }
+#+END_SRC
+
+* Foobar
+
+A change to move ab from the heap to the stack, for efficiency...
+
+#+BEGIN_SRC cpp
+  bool foo(const CBag& a, const CBag& b, const CBag& c)
+  {
+    CBag ab;
+    ab += a;                      // Clone a to avoid clobbering it
+    ab += b;                      // ab is now the union of a and b
+    bool result = ab <= c;
+    return result;
+  }
+#+END_SRC
+
+* The Problem
