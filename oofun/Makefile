@@ -1,7 +1,9 @@
 oofun.html: oofun.org reveal.js Makefile
 	pandoc -t revealjs -s \
-	--slide-level 1 \
-	-V theme=beige -V history=true \
+	--slide-level 2 \
+	-V theme=white \
+	-V history=true \
+	-V css=oofun.css \
 	oofun.org > $@
 
 reveal.js:

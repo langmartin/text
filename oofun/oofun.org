@@ -1,32 +1,25 @@
-* The Paper
-
-+ Oleg Kiselyov is a free range computer scientist
-+ all of his stuff is super interesting
-+ this paper motiviates functional programming by outlining a specific
-  problem with OO and types
+* Subtyping, Subclassing, and Trouble with OOP
+** The Paper
 
 http://okmij.org/ftp/Computation/Subtyping/Trouble.html
 
-* The Claim
-:PROPERTIES:
-:data-background: #999999
-:data-background-size: 100px
-:data-background-repeat: true
-:data-background-repeat: true
-:data-background-transition: zoom
-:END:
++ A specific problem with OOP and type inheritance
++ And a specific solution; functional programming
++ Wikipedia with other resources [[https://en.wikipedia.org/wiki/Circle-ellipse_problem][Circle Ellipse Problem]]
+
+** The Claim
 
 Two concrete implementations of a common interface can't generally be
 substituted for one another without knowing details of their
 implementation, when code and data are bundled together
 
-* The Setup
+** The Setup
 
-+ A fairly straightforward Bag interface
-+ Operators depending on the public interface for Bag
-+ A CSet, which defines =put= to avoid duplicates
++ CBag, an interface for a collection of numbers
++ Operators depending only on the public interface for Bag
++ CSet, which implements =put= to avoid duplicates
 
-* Foo
+** Foo
 
 A function using only the public interface, decides if a + b is
 contained in c.
@@ -34,27 +27,87 @@ contained in c.
 #+BEGIN_SRC cpp
   bool foo(const CBag& a, const CBag& b, const CBag& c)
   {
-    CBag & ab = *(a.clone());     // Clone a to avoid clobbering it
-    ab += b;                      // ab is now the union of a and b
-    bool result = ab <= c;
-    delete &ab;
-    return result;
+      CBag & ab = *(a.clone());     // Clone a to avoid clobbering it
+      ab += b;                      // ab is now the union of a and b
+      bool result = ab <= c;
+      delete &ab;
+      return result;
   }
 #+END_SRC
 
-* Foobar
+** Foobar
+:PROPERTIES:
+:data-background: fire.jpg
+:data-background-size: contain
+:data-state: blur
+:END:
 
 A change to move ab from the heap to the stack, for efficiency...
 
 #+BEGIN_SRC cpp
   bool foo(const CBag& a, const CBag& b, const CBag& c)
   {
-    CBag ab;
-    ab += a;                      // Clone a to avoid clobbering it
-    ab += b;                      // ab is now the union of a and b
-    bool result = ab <= c;
-    return result;
+      CBag ab;
+      ab += a;                      // Clone a to avoid clobbering it
+      ab += b;                      // ab is now the union of a and b
+      bool result = ab <= c;
+      return result;
   }
 #+END_SRC
 
-* The Problem
+** Comments
+
++ Immutability as such doesn't help
++ Limited to inheritance, but implementation of an interface is a
+  limited type of inheritance
+
+** BRules
+
++ No virtual methods or virtual inheritance
++ No visible members or methods in any public data structure
++ No mutations to public data structures
+
+#+BEGIN_QUOTE
+The rules break the major tenets of OOP: for example, values no longer
+have a state that is separate from their identity.
+#+END_QUOTE
+
+** FBag Separates Data and Behavior
+
+#+BEGIN_QUOTE
+It must be stressed that the functions that operate on a FBag are not
+FBag’s methods; in particular, they are not a part of the class FBag,
+they are not inherited and they cannot be overridden.
+#+END_QUOTE
+
+** FSet Constrains and Extends FBag
+
+#+BEGIN_SRC cpp
+  class FSet : public FBag {
+  public:
+      FSet(void) {}
+      FSet(const FBag& bag) : FBag(remove_duplicates(bag)) {}
+  };
+
+  bool memberof(const FSet& set, const int elem)
+  { return count(set,elem) > 0; }
+#+END_SRC
+
+** Data Inheritance is Ok!
+
++ an FSet is an FBag, consider =foo=
++ Polymorphic return values are safe, the caller's FSet declaration
+  will produce a properly constrained FBag
+
+#+BEGIN_QUOTE
+Because all FSet values are created by an FBag constructor, all FBag
+operations automatically apply to an FSet value.
+#+END_QUOTE
+
+** Generality
+
++ Discussion section, uf-integers vs. integers
++ Code samples, circles and squares vs ellipses and rectangles
++ BRules allow data types to change class when necessary
++ Preserve code sharing between similar classes
++ Similarity to typed pure languges
