@@ -4,5 +4,5 @@ html.blur .backgrounds {
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
     filter: blur(2px);
-    opacity: 0.2
+    opacity: 0.4
 }

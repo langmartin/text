@@ -14,6 +14,10 @@ substituted for one another without knowing details of their
 implementation, when code and data are bundled together
 
 ** The Setup
+:PROPERTIES:
+:data-background: sting.jpg
+:data-state: blur
+:END:
 
 + CBag, an interface for a collection of numbers
 + Operators depending only on the public interface for Bag
@@ -38,7 +42,6 @@ contained in c.
 ** Foobar
 :PROPERTIES:
 :data-background: tire-fire.jpg
-:data-background-size: contain
 :END:
 
 A change to move ab from the heap to the stack, for efficiency...
