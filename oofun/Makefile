@@ -1,7 +1,8 @@
 oofun.html: oofun.org reveal.js Makefile
 	pandoc -t revealjs -s \
 	--slide-level 2 \
-	-V theme=white \
+	-V theme=black \
+	--highlight-style=zenburn \
 	-V history=true \
 	-V css=oofun.css \
 	oofun.org > $@

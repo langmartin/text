@@ -37,9 +37,8 @@ contained in c.
 
 ** Foobar
 :PROPERTIES:
-:data-background: fire.jpg
+:data-background: tire-fire.jpg
 :data-background-size: contain
-:data-state: blur
 :END:
 
 A change to move ab from the heap to the stack, for efficiency...
