@@ -1,5 +1,14 @@
+* OOFun
+
+Papers we love on http://okmij.org/ftp/Computation/Subtyping/
+Makefile for reveal.js via pandoc
+
 * CRDTs
 
 My CRDTs "slides" are an org-mode file and an clojure source file. The
 slide show "mode" I used is here:
 https://github.com/langmartin/dot-file/blob/master/.emacs#L218.
+
+* Continuations
+
+A discussion of continuations for Lambda Lounge
