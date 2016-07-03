@@ -16,6 +16,7 @@ implementation, when code and data are bundled together
 ** The Setup
 :PROPERTIES:
 :data-background: sting.jpg
+:data-background-transition: slide
 :data-state: blur
 :END:
 
@@ -24,6 +25,9 @@ implementation, when code and data are bundled together
 + CSet, which implements =put= to avoid duplicates
 
 ** Foo
+:PROPERTIES:
+:data-background: daises.jpg
+:END:
 
 A function using only the public interface, decides if a + b is
 contained in c.
