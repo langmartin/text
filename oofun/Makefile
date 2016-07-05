@@ -5,6 +5,8 @@ oofun.html: oofun.org reveal.js Makefile
 	--highlight-style=zenburn \
 	-V history=true \
 	-V css=oofun.css \
+	-V backgroundTransition=none \
+	-V transitionSpeed=fast \
 	oofun.org > $@
 
 reveal.js:

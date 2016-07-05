@@ -9,14 +9,13 @@ http://okmij.org/ftp/Computation/Subtyping/Trouble.html
 
 ** The Claim
 
-Two concrete implementations of a common interface can't generally be
-substituted for one another without knowing details of their
-implementation, when code and data are bundled together
+When code and data are bundled together, concrete implementations of a
+common interface can't generally be substituted for one another
+without leaking details of their implementation.
 
 ** The Setup
 :PROPERTIES:
 :data-background: sting.jpg
-:data-background-transition: slide
 :data-state: blur
 :END:
 
@@ -27,6 +26,7 @@ implementation, when code and data are bundled together
 ** Foo
 :PROPERTIES:
 :data-background: daises.jpg
+:data-state: blur
 :END:
 
 A function using only the public interface, decides if a + b is
@@ -61,11 +61,18 @@ A change to move ab from the heap to the stack, for efficiency...
   }
 #+END_SRC
 
-** Comments
+** It Gets Worse
 
-+ Immutability as such doesn't help
-+ Limited to inheritance, but implementation of an interface is a
-  limited type of inheritance
++ Immutability by itself doesn't help
++ Limited to inheritance, but implementation of an interface is
+  sufficient
+
+#+BEGIN_SRC scheme
+  (define (fnb bag)
+    (send bag ’put 5)
+    (send bag ’put 5)
+    (send bag ’count 5))
+#+END_SRC
 
 ** BRules
 
@@ -99,11 +106,11 @@ they are not inherited and they cannot be overridden.
   { return count(set,elem) > 0; }
 #+END_SRC
 
-** Data Inheritance is Ok!
+** Inheritance
 
-+ an FSet is an FBag, consider =foo=
-+ Polymorphic return values are safe, the caller's FSet declaration
-  will produce a properly constrained FBag
++ An FSet is an FBag, reconsider =foo=
++ The caller's FSet declaration will create a properly constrained
+  FBag
 
 #+BEGIN_QUOTE
 Because all FSet values are created by an FBag constructor, all FBag
