@@ -63,9 +63,9 @@ A change to move ab from the heap to the stack, for efficiency...
 
 ** It Gets Worse
 
-+ Immutability by itself doesn't help
 + Limited to inheritance, but implementation of an interface is
   sufficient
++ Immutability by itself doesn't help
 
 #+BEGIN_SRC scheme
   (define (fnb bag)
@@ -117,10 +117,10 @@ Because all FSet values are created by an FBag constructor, all FBag
 operations automatically apply to an FSet value.
 #+END_QUOTE
 
-** Generality
+** Comments
 
-+ Discussion section, uf-integers vs. integers
-+ Code samples, circles and squares vs ellipses and rectangles
++ Discussion: uf-integers vs. integers
++ Code: circles and squares vs ellipses and rectangles
 + BRules allow data types to change class when necessary
 + Preserve code sharing between similar classes
 + Similarity to typed pure languges
