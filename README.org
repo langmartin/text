@@ -1,7 +1,29 @@
-* OOFun
+* Papers We Love
 
-Papers we love on http://okmij.org/ftp/Computation/Subtyping/
+Bio: Lang Martin is a hacker, hand waver, and eternal optimist. Interest
+in langauges and problems of expression, distributed systems, and better
+communication. Currently working at his own startup as the fullest stack
+engineer ever, and wishing he had someone to dump some frontend work
+onto.
+
+** The Power of Two Random Choices
+
+A Survey of Techniques and Results
+
+http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.25.8277
+
+So this is a big paper about a small idea: two random choices and a
+comparison are unreasonably more effective than one random choice, and
+you don't need a third. We'll go through the introduction completely,
+and I'll cherry pick things that I find interesting in the main body
+of the paper. So many proofs. It's a tool you'll use!
+
+** OOFun
+
+http://okmij.org/ftp/Computation/Subtyping/
 Makefile for reveal.js via pandoc
+
+
 
 * CRDTs
 
