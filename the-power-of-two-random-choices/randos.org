@@ -16,6 +16,46 @@
 ** The Paper
 
 - Introduction explains the motivation and technique
-- 50 pages of reviewed proofs
+- Discussion of mathmatical strategies for evaluating ball & bin
+  routing problems to equip future researchers
+- Reviews of proofs
 
 ** Balls in Buckets
+
+- Selecting a bucket at random makes the largest bucket
+  $\log n/\log\log n$
+- Pick two buckers, and choose the emptier bucket. The largest bucket
+  is now $\log \log n/\log 2 + \Theta(1)$
+- 2 is $d$ in general, more random choices provide a linear
+  improvement, but the big reduction in size is accomplished by two
+  choices
+
+** Hashing
+
+- Hash table maps the value of the hashing function for the key to a
+  list of colliding results (chain)
+- Hash by two random functions, choose the shortest chain
+
+** Shared Memory Emulations on DMMs
+
+- Hashing memory addresses distributed across the cluster
+- Historically, one of the first applications
+
+** Load Balancing with Limited Information
+
+- Load information can be expensive and unavailable
+- Static :: balls are added to buckets
+- Dynamic :: balls are also removed from buckets sometimes
+
+Dynamic case models load balancing, and complicates the math
+
+** Low Congestion Circuit Routing
+
+- Witness tree technique with explict histories of \vec v$ insertions
+  and $\vec w$ deletions, applied alternately (just to limit balls in
+  play)
+- Sticky; if a $v_i$ has been routed to a bin before, it's placed in
+  the least loaded of the two bins selected the first time
+- Pruned to unique bins and mappings of balls to bin choices
+- Rebalancing provides no extra benefit
+- Proof that in general this is the best we can do for maximum load
