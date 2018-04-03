@@ -49,13 +49,37 @@
 
 Dynamic case models load balancing, and complicates the math
 
-** Low Congestion Circuit Routing
+* Low Congestion Circuit Routing
 
-- Witness tree technique with explict histories of \vec v$ insertions
-  and $\vec w$ deletions, applied alternately (just to limit balls in
-  play)
+** Modeling Tecnniques in the Paper
+
+- Layered Induction :: when I add to a bucket, how many have more
+     balls?
+- Witness tree :: model balls entering the system. Directly model
+                  deletions for the dynamic model
+- Fluid Limits :: bins to infinity, concentrate results to finite
+                  application
+
+** Witness Tree Details
+
+- Explict histories of $\vec v$ insertions and $\vec w$ deletions,
+  applied alternately (to limit balls in play)
 - Sticky; if a $v_i$ has been routed to a bin before, it's placed in
   the least loaded of the two bins selected the first time
 - Pruned to unique bins and mappings of balls to bin choices
 - Rebalancing provides no extra benefit
 - Proof that in general this is the best we can do for maximum load
+
+** Congestion Model
+
+- Two-fold butterfly traces a unique path from each input node to each
+  output node, and back (like handling a request)
+- Valiant reduces congestion by choosing an intermediate node
+  uniformly at random, which maps to the balls and bins problem, and
+  is $\Theta(\log n/\log\log n)$
+
+** A Thing That Didn't Work
+
+- Randomly choose 2, choose the path with the least congestion
+- Congestion is worst at the edges, so we don't improve much
+-
