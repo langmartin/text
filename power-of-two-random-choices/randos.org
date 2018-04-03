@@ -16,25 +16,35 @@
 ** The Paper
 
 - Introduction explains the motivation and technique
-- Discussion of mathmatical strategies for evaluating ball & bin
-  routing problems to equip future researchers
+- Discussion of strategies for evaluating ball & bin routing problems
+  to equip future researchers
 - Reviews of proofs
+
+** Big O, Theta & Omega
+
+- Skip? My formal notation was a little rusty
+- $O$ is the upper bound, $\Omega$ the lower bound, $\Theta$ both
+- Boundaries are constant factors, not algorithmic complexity (so not
+  average case vs. worst case)
+- Typically prove $O$ or $\Omega$ and then claim $\Theta$ when we have
+  both
 
 ** Balls in Bins
 
 - Selecting a bin at random makes the largest bin
-  $\log n/\log\log n$
-- Pick two buckers, and choose the emptier bin. The largest bin
-  is now $\log \log n/\log 2 + \Theta(1)$
-- $\log \log n/\log g + \Theta(1)$ in general; more random choices
-  provide a linear improvement, but the big reduction in size is
-  accomplished by two choices
+  $\log n/\log\log n$ (with high probability)
+- Pick two bins at random, and choose the emptiest. The largest bin is
+  now $\log \log n/\log 2 + \Theta(1)$
+- $\log \log n/\log g + \Theta(1)$ in general; more choices provide a
+  linear improvement, but the big complexity gain only takes two
 
 ** Hashing
 
-- Hash table maps the value of the hashing function for the key to a
-  list of colliding results (chain)
-- Hash by two random functions, choose the shortest chain
+- Standard hash tables use a hashing function $f$ from key to chain of
+  collisions, and search the chain linearly. For a perfectly random
+  $f$ the longest chain is $\Theta(\log n/\log\log n)$ (again)
+- Hash by two functions, choose the shortest chain
+- Lookup must search both chains, still $\Theta(\log\log n)$
 
 ** Shared Memory Emulations on DMMs
 
@@ -43,46 +53,101 @@
 
 ** Load Balancing with Limited Information
 
-- Load information can be expensive and/or unavailable
-- *Static* balls are added to bins
-- *Dynamic* balls are also removed from bins sometimes. usually the
-  real world model, messes up the math
+- Iterating load information is expensive
+- May be missing or outdated
+- More later...
 
 * Low Congestion Circuit Routing
 
-** Modeling Techniques We're Skipping
+** Models
 
-- Layered Induction :: how many bins have more balls? Accurate
-     numerically, can describe dynamic systems
+- Static :: add balls to bins
+- Dynamic :: balls add to and removed from bins
 
-- Fluid Limits :: infinite bins, concentrate results to finite
-                  application. Very accurate, weak for complex
-                  systems, especially with dependencies
+** Techniques
 
-** Witness Tree Details
+- Layered Induction :: how many bins have more balls? Recurse.
+     Accurate numerically, straightforward. Weak for parallel systems
+- Witness Trees :: less accurate, strong over complex systems
+- Fluid Limits :: change over time as bins go to infinity. Numerically
+                  very accurate, weak for systems with dependencies
 
-- Inaccurate, strong over complex systems, hairy
-- Explict histories $\vec v$ insertions and $\vec w$ deletions,
-  applied alternately (to limit balls in play)
-- Sticky; if a $v_i$ has been routed before, it's placed in the least
-  loaded of the two bins selected the first time
+** Witness Tree
+
+- Independent vectors of additions and removals
 - For an over-full bin, prune the tree of events and find its
   probability
+- Sticky, each ball's available choices remain in the tree
+- Calculate the probability of a pruned tree by adding the degrees of
+  choice in the tree (it's harder than that)
 
 ** Congestion Model
 
-- Two-fold butterfly traces a unique path from each input node to each
-  output node, and back (like handling a request)
-- Valiant reduces congestion by choosing an intermediate node
-  uniformly at random, which maps to the balls and bins problem, and
-  is $\Theta(\log n/\log\log n)$
+- Butterfly network has a unique path from each input node to each
+  output node, using an extra $\log n + 1$ nodes
+- Valiant reduces congestion by choosing an intermediate node at
+  random, which maps to the balls and bins problem, and is
+  $\Theta(\log n/\log\log n)$
+- We use two, placed end to end, to mark the intermediate destination
+- "Question begs asking" what about pick two, pick less congested?
 
-** A Thing That Didn't Work
+** The Detail
 
-- Randomly choose 2, choose the path with the least congestion
 - Congestion is worst at the edges, so we don't improve much
-- Traversing from input to the half way point, flip a coin to choose
-  either the forward edge or the cross edge at each node. The random
-  choices start close to the input
-- From the half way point $d$ where $d = \log n$, flip the path $p$
-  with it's /buddy/ $p'$ the same way
+- Let the depth $d = \log n$
+- Traversing from input to $d/2$, flip a coin to choose either the
+  forward edge or the cross edge at each node. Keeps the choices close
+  to the input
+- From $3d/2$ to the output, flip the path $p$ with it's buddy $p'$
+  the same way, until reaching the output
+
+** Proving Congestion
+
+- Fix the positions of the flipped routes, so each request has two
+  path choices
+- Some edge is congested by $\log\log n + 1$, trace the request just
+  before
+- Consider buddies (not less congested) recursively
+- Big reduction for Valiant's for dynamic routing
+- Any static permutation in $O(\log\log n/\log\log\log n)$
+
+* Queuing
+
+** The Setup
+
+- Events arrive at a load $\lambda n < 1$, processed in FIFO order in
+  exponential time, mean 1
+- Fluid limits describe the results as change in depth of queue at
+  server over time, find a fixed point
+- Static system with 1m balls & bins random max load 12, double random
+  max load 4
+- Queue with 100 servers and a load $\lambda = 0.99$ random takes 100
+  ticks, double random takes 6
+
+** Double Exponents
+
+- Max queue length changes exponentially
+- Processing time changes exponentially also
+- Most of the gain realized by using the double random method on only
+  20% of the traffic and random for the rest
+
+** Load Information Delay
+
+- In the non-random case, choosing the apparently shortest queue when
+  load information is delayed is like, super bad
+- Weirder, choosing from two is a better global strategy than choosing
+  from three
+- The additional choice allows the herding behavior of the non-random
+  model to reassert itself
+- As the delay goes to infinity two choices is worse than simple
+  random selection
+
+* Conclusions
+
+** Remember This Exists
+
+- Random choices are really easy
+- Measuring a little is easier than measuring everything
+- Queuing results show that a little improvement can have large
+  effects
+- Many details have been worked out for specific applications
