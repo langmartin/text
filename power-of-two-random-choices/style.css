@@ -6,3 +6,7 @@ html.blur .backgrounds {
     filter: blur(2px);
     opacity: 0.4
 }
+
+.math.inline {
+    margin-right: 0.1em;
+}
