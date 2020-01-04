@@ -1,0 +1,76 @@
+#+TITLE: What Goes Around Comes Around
+
+* Epochs
+
+- Hierarchical (IMS): late 1960's and 1970's
+- Network (CODASYL): 1970's
+- Relational: 1970's and early 1980's Entity-Relationship: 1970's
+- Extended Relational: 1980's
+- Semantic: late 1970's and 1980's
+- Object-oriented: late 1980's and early 1990's
+- Object-relational: late 1980's and early 1990's
+
+* Meta Lessons
+:PROPERTIES:
+:data-background: img/golden-arches.jpg
+:data-state: blur
+:END:
+
+- The market decides, not always wisely
+
+* Hierarchical
+** Lessons
+
+1. Physical and logical data independence are highly desirable
+2. Tree structured data models are very restrictive
+3. It is a challenge to provide sophisticated logical reorganizations of tree structured data
+4. A record-at-a-time user interface forces the programmer to do manual query optimization, and this is often hard.
+
+* Network
+** Lessons
+
+5. Networks are more flexible than hierarchies but more complex
+6. Loading and recovering networks is more complex than hierarchies
+
+* Relational
+** Lessons
+
+7. Set-a-time languages are good, regardless of the data model, since they offer much improved physical data independence.
+8. Logical data independence is easier with a simple data model than with a complex one.
+9. Technical debates are usually settled by the elephants of the marketplace, and often for reasons that have little to do with the technology.
+10. Query optimizers can beat all but the best record-at-a-time DBMS
+    application programmers.
+
+* Entity-Relationship
+** Lessons
+
+11. Functional dependencies are too difficult for mere mortals to
+    understand. Another reason for KISS
+
+* R++
+** Lessons
+
+12. Unless there is a big performance or functionality advantage, new constructs will go nowhere.
+
+* Semantic
+** Lessons
+
+13. Packages will not sell to users unless they are in "major pain"
+
+* Object Oriented
+** Lessons
+
+14. Persistent languages will go nowhere without the support of the programming language community.
+
+* Object Relational
+** Lessons
+
+14[sic]. The major benefits of OR is two-fold. putting code in the data base (and thereby bluring the distinction between code and data) and user-defined access methods.
+15. Widespread adoption of new technology requires either standards and/or an elephant pushing hard.
+
+* XML Predictions
+** Lessons
+
+17. Schema-last is a probably a niche market
+18. XQuery is pretty much OR SQL with a different syntax
+19. XML will not solve the semantic heterogeneity either inside or outside the enterprise.
