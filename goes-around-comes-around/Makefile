@@ -1,6 +1,6 @@
 gaca.html: gaca.org reveal.js Makefile
 	pandoc -t revealjs -s \
-	--slide-level 2 \
+	--slide-level 1 \
 	-V theme=black \
 	--highlight-style=zenburn \
 	-V history=true \

@@ -16,57 +16,71 @@
 :data-state: blur
 :END:
 
+- Me: we end making these design tradeoffs in applications
 - The market decides, not always wisely
 
-* Hierarchical
-** Lessons
+* Terms
 
-1. Physical and logical data independence are highly desirable
-2. Tree structured data models are very restrictive
-3. It is a challenge to provide sophisticated logical reorganizations of tree structured data
-4. A record-at-a-time user interface forces the programmer to do manual query optimization, and this is often hard.
+- Physical data independence: the ability to change unindexed data
+  storage (like order of records) and run programs written for the old
+  data storage layer
+
+* Hierarchical
+:PROPERTIES:
+:data-background: img/big-key.jpg
+:data-state: blur
+:END:
+
+- Physical and logical data independence are highly desirable (but impossible)
+- Tree structured data models are very restrictive
+- It is a challenge to provide sophisticated logical reorganizations
+  of tree structured data
+- A record-at-a-time user interface forces the programmer to do
+  manual query optimization, and this is often hard.
 
 * Network
-** Lessons
+:PROPERTIES:
+:data-background: img/bunch-keys.jpg
+:data-state: blur
+:END:
 
-5. Networks are more flexible than hierarchies but more complex
-6. Loading and recovering networks is more complex than hierarchies
+- Networks are more flexible than hierarchies but more complex
+- Loading and recovering networks is more complex than hierarchies
+  (broken pointers)
 
 * Relational
-** Lessons
 
-7. Set-a-time languages are good, regardless of the data model, since they offer much improved physical data independence.
-8. Logical data independence is easier with a simple data model than with a complex one.
-9. Technical debates are usually settled by the elephants of the marketplace, and often for reasons that have little to do with the technology.
-10. Query optimizers can beat all but the best record-at-a-time DBMS
-    application programmers.
+- Set-a-time languages are good, regardless of the data model, since
+  they offer much improved physical data independence.
+- Logical data independence is easier with a simple data model than
+  with a complex one.
+- Technical debates are usually settled by the elephants of the
+  marketplace, and often for reasons that have little to do with the
+  technology.
+- Query optimizers can beat all but the best record-at-a-time DBMS
+  application programmers.
 
 * Entity-Relationship
-** Lessons
 
-11. Functional dependencies are too difficult for mere mortals to
-    understand. Another reason for KISS
+- Functional dependencies are too difficult for mere mortals to
+  understand. Another reason for KISS
 
 * R++
-** Lessons
 
-12. Unless there is a big performance or functionality advantage, new constructs will go nowhere.
+- Unless there is a big performance or functionality advantage, new constructs will go nowhere.
 
 * Semantic
-** Lessons
 
-13. Packages will not sell to users unless they are in "major pain"
+- Packages will not sell to users unless they are in "major pain"
 
 * Object Oriented
-** Lessons
 
-14. Persistent languages will go nowhere without the support of the programming language community.
+- Persistent languages will go nowhere without the support of the programming language community.
 
 * Object Relational
-** Lessons
 
-14[sic]. The major benefits of OR is two-fold. putting code in the data base (and thereby bluring the distinction between code and data) and user-defined access methods.
-15. Widespread adoption of new technology requires either standards and/or an elephant pushing hard.
+- The major benefits of OR is two-fold. putting code in the data base (and thereby bluring the distinction between code and data) and user-defined access methods.
+- Widespread adoption of new technology requires either standards and/or an elephant pushing hard.
 
 * XML Predictions
 ** Lessons
