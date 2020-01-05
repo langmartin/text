@@ -1,6 +1,21 @@
 #+TITLE: What Goes Around Comes Around
 
+* Intro
+:PROPERTIES:
+:data-background: img/lawn.jpg
+:data-state: blur
+:END:
+
+- Data model proposals come along regularly
+- Often without benefit of hindsight (2020)
+- Hence, 35 years of "progress", what should we learn
+- Predictions about XML
+
 * Epochs
+:PROPERTIES:
+:data-background: img/lawn.jpg
+:data-state: blur
+:END:
 
 - Hierarchical (IMS): late 1960's and 1970's
 - Network (CODASYL): 1970's
@@ -20,6 +35,10 @@
 - The market decides, not always wisely
 
 * Terms
+:PROPERTIES:
+:data-background: img/nicea.jpg
+:data-state: blur
+:END:
 
 - Physical data independence: the ability to change unindexed data
   storage (like order of records) and run programs written for the old
@@ -35,10 +54,8 @@
 ** IMS
 - Physical and logical data independence are highly desirable
 - Tree structured data models are very restrictive
-- It is a challenge to provide sophisticated logical reorganizations
-  of tree structured data
-- A record-at-a-time user interface forces the programmer to do
-  manual query optimization, and this is often hard.
+- It is hard to logically reorganize tree structured data
+- Record-at-a-time is hard to hand optimize
 
 * Network
 :PROPERTIES:
@@ -54,6 +71,10 @@
   (broken pointers)
 
 * The Great Debate
+:PROPERTIES:
+:data-background: img/duel.jpg
+:data-state: blur
+:END:
 
 - Relational, set-at-a-time high level languages
 - CODASYL is too complex to be good
@@ -79,29 +100,60 @@ vs.
 - The market: VAX vs mainframe
 
 * Entity-Relationship
+:PROPERTIES:
+:data-background: img/straw-arrows.jpg
+:data-state: blur
+:END:
 
-- Functional dependencies are too difficult for mere mortals to
-  understand. Another reason for KISS
+- Introduced without a query language, but boxes & arrows
+- Used in schema design tools
+- Alternative: normalization
+- Functional dependencies are too hard
 
 * R++
+:PROPERTIES:
+:data-background: img/table-with-stuff.jpg
+:data-state: blur
+:END:
 
-- Unless there is a big performance or functionality advantage, new constructs will go nowhere.
+- Relation + this one thing to solve a problem
+- e.g. Gem
+  - set values
+  - foreign key cascaded dot reference
+  - generalization via inheritance
+- Unless there is a big performance or functionality advantage, new constructs will go nowhere
 
 * Semantic
+:PROPERTIES:
+:data-background: img/kitchen-sink.jpg
+:data-state: blur
+:END:
 
-- Packages will not sell to users unless they are in "major pain"
+- Attribute that's a set of records in other classes =country.ships => {}=
+- Inverse attributes =ship.country_of_registration=
+- Multiple inheritance
+- Too easy to simulate on relational systems
+- Big vendors focused on transactional performance
 
 * Object Oriented
+:PROPERTIES:
+:data-background: img/cuneiform.jpg
+:data-state: blur
+:END:
 
-- Persistent languages will go nowhere without the support of the programming language community.
+- Motivated by the ORM "impedance mismatch"
+- Embedded == limited to the language. Expertise doesn't transfer
+- O2 embedded an HLL. Sadly, French
+- Packages will not sell to users unless they are in "major pain"
+- Persistent langauges need support of the programming language community
 
 * Object Relational
 
+- Motivated by Ingress working on GIS queries
 - The major benefits of OR is two-fold. putting code in the data base (and thereby bluring the distinction between code and data) and user-defined access methods.
 - Widespread adoption of new technology requires either standards and/or an elephant pushing hard.
 
 * XML Predictions
-** Lessons
 
 17. Schema-last is a probably a niche market
 18. XQuery is pretty much OR SQL with a different syntax
