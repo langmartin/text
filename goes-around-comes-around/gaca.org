@@ -155,6 +155,18 @@ vs.
 
 * XML Predictions
 
-17. Schema-last is a probably a niche market
-18. XQuery is pretty much OR SQL with a different syntax
-19. XML will not solve the semantic heterogeneity either inside or outside the enterprise.
+- Schema-last is a probably a niche market
+- XQuery is pretty much OR SQL with a different syntax
+- XML will not solve the semantic heterogeneity either inside or outside the enterprise.
+
+* Full Circle
+:PROPERTIES:
+:data-background: img/ouroboros.jpg
+:data-state: blur
+:END:
+
+- Started with complex relationships
+- Simple ones were better
+- Extensions were not good enough to matter
+- OR extensions (user types, access) were performance
+- XML is a superset of the union of proposals
