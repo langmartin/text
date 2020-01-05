@@ -24,6 +24,7 @@
 - Physical data independence: the ability to change unindexed data
   storage (like order of records) and run programs written for the old
   data storage layer
+- Logical independence: add fields to db records, exlude them for a view
 
 * Hierarchical
 :PROPERTIES:
@@ -31,7 +32,8 @@
 :data-state: blur
 :END:
 
-- Physical and logical data independence are highly desirable (but impossible)
+** IMS
+- Physical and logical data independence are highly desirable
 - Tree structured data models are very restrictive
 - It is a challenge to provide sophisticated logical reorganizations
   of tree structured data
@@ -44,21 +46,37 @@
 :data-state: blur
 :END:
 
+** CODASYL
+
 - Networks are more flexible than hierarchies but more complex
-- Loading and recovering networks is more complex than hierarchies
+- Less physically and logically independent
+- Loading and recovering networks is harder than hierarchies
   (broken pointers)
 
+* The Great Debate
+
+- Relational, set-at-a-time high level languages
+- CODASYL is too complex to be good
+- Record-at-a-time is too hard to optimize
+
+vs.
+
+- COBOL programmers can't understand new things
+- Anyway, set languages can be built on CODASYL
+
 * Relational
+:PROPERTIES:
+:data-background: img/rustic-table.jpg
+:data-state: blur
+:END:
 
 - Set-a-time languages are good, regardless of the data model, since
-  they offer much improved physical data independence.
+  they offer much improved physical data independence
 - Logical data independence is easier with a simple data model than
-  with a complex one.
-- Technical debates are usually settled by the elephants of the
-  marketplace, and often for reasons that have little to do with the
-  technology.
+  with a complex one
 - Query optimizers can beat all but the best record-at-a-time DBMS
-  application programmers.
+  application programmers
+- The market: VAX vs mainframe
 
 * Entity-Relationship
 
