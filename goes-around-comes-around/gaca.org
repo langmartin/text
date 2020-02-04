@@ -31,7 +31,6 @@
 :data-state: blur
 :END:
 
-- Me: we end making these design tradeoffs in applications
 - The market decides, not always wisely
 
 * Terms
@@ -43,7 +42,7 @@
 - Physical data independence: the ability to change unindexed data
   storage (like order of records) and run programs written for the old
   data storage layer
-- Logical independence: add fields to db records, exlude them for a view
+- Logical independence: add fields to db records, exclude them for a view
 
 * Hierarchical
 :PROPERTIES:
@@ -52,6 +51,7 @@
 :END:
 
 ** IMS
+
 - Physical and logical data independence are highly desirable
 - Tree structured data models are very restrictive
 - It is hard to logically reorganize tree structured data
@@ -76,14 +76,23 @@
 :data-state: blur
 :END:
 
+** Ted Codd
+
 - Relational, set-at-a-time high level languages
 - CODASYL is too complex to be good
 - Record-at-a-time is too hard to optimize
 
-vs.
+* The Great Debate
+:PROPERTIES:
+:data-background: img/duel.jpg
+:data-state: blur
+:END:
+
+** Charlie Bachman
 
 - COBOL programmers can't understand new things
-- Anyway, set languages can be built on CODASYL
+- Relational model can't be efficient
+- Anyway, tables can be built on CODASYL
 
 * Relational
 :PROPERTIES:
@@ -137,7 +146,7 @@ vs.
 
 * Object Oriented
 :PROPERTIES:
-:data-background: img/cuneiform.jpg
+:data-background: img/carbonite.jpg
 :data-state: blur
 :END:
 
@@ -145,15 +154,25 @@ vs.
 - Embedded == limited to the language. Expertise doesn't transfer
 - O2 embedded an HLL. Sadly, French
 - Packages will not sell to users unless they are in "major pain"
-- Persistent langauges need support of the programming language community
+- Persistent languages need support of the programming language community
 
 * Object Relational
+:PROPERTIES:
+:data-background: img/earth.jpg
+:data-state: blur
+:END:
 
 - Motivated by Ingress working on GIS queries
-- The major benefits of OR is two-fold. putting code in the data base (and thereby bluring the distinction between code and data) and user-defined access methods.
-- Widespread adoption of new technology requires either standards and/or an elephant pushing hard.
+- Two benefits:
+  - Code in the database
+  - User defined types and access methods
+- Adoption requires standards and/or an elephant
 
 * XML Predictions
+:PROPERTIES:
+:data-background: img/crystal-ball.png
+:data-state: blur
+:END:
 
 - Schema-last is a probably a niche market
 - XQuery is pretty much OR SQL with a different syntax
@@ -168,5 +187,38 @@ vs.
 - Started with complex relationships
 - Simple ones were better
 - Extensions were not good enough to matter
-- OR extensions (user types, access) were performance
+- OR extensions (user defined functions & types) were performance motivated
 - XML is a superset of the union of proposals
+
+* Lessons
+:PROPERTIES:
+:data-background: img/ouroboros.jpg
+:data-state: blur
+:END:
+
+"To avoid repeating history, it is always wise to stand on the
+shoulders of those who went before, rather than on their feet."
+
+- Code in the database is good
+- Schema last is good, but niche
+
+* PS: NoSQL
+:PROPERTIES:
+:data-background: img/mango.jpg
+:data-state: blur
+:END:
+
+- Foot standing
+- Performance the main hook
+- Market lessons again
+- Hand-optimizing multi-object lookups is hard
+- Migration is hard (schema first + logical independence)
+
+* PPS: Graph Databases
+:PROPERTIES:
+:data-background: img/spider-man4.jpg
+:data-state: blur
+:END:
+
+- Developers need a strong incentive to adopt
+- Uneven performance changes for different applications
