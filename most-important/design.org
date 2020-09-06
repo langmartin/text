@@ -1,0 +1,13 @@
+* Design
+
+[fn:1] Knight, J. C. and Leveson, N. G. 1986. An experimental evaluation
+of the assumption of independence in multiversion programming. IEEE
+Trans. Softw. Eng. 12, 1 (Jan. 1986), 96-109.
+http://portal.acm.org/citation.cfm?coll=GUIDE&dl=GUIDE&id=10688
+
+[fn:2] Knight, J. C. and Leveson, N. G. 1990. A reply to the criticisms
+of the Knight & Leveson experiment. SIGSOFT Softw. Eng. Notes 15, 1
+(Jan. 1990), 24-35.
+http://doi.acm.org/10.1145/382294.382710
+
+[fn:3] https://danluu.com/empirical-pl/

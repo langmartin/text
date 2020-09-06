@@ -1,0 +1,18 @@
+* Offline First
+
+* Incremental Abstraction
+
+CRDTs formalize ad hoc techniques for safe offline data handling,
+which are notoriously prone to edge case exceptions.
+
+** Timestamps
+
+** Ordering
+
+* The Rest
+
+** Secondary Indexes
+
+** The Property in the Room
+
+* Branching is a Feature
