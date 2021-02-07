@@ -1,0 +1,196 @@
+#+title: Lineage Driven Fault Injection
+
+* State of the Art
+:properties:
+:data-background: img/tire-fire.jpg
+:end:
+
+- Distributed systems are hard
+- Formal methods unweildy
+- Testing methods weak
+- Programmer driven heuristics don't scale
+
+* Bottom Up Limitations
+
+- Glue together safe components
+- Safety does not compose
+
+* Top Down Limitations
+:properties:
+:data-background: img/raiders-of-lost-ark-warehouse.jpg
+:end:
+
+- Huge state space\\
+  $30! / 5!(30-5)! = 3,562,650$
+- Incomplete testing
+
+* Ideal
+:properties:
+:data-background: img/bach-wtc1-title-ms.jpg
+:class: background-fit
+:end:
+
+- Sound
+- Complete
+
+* Lineage Driven
+:properties:
+:data-background: img/George_Boole.jpg
+:class: background-fit
+:end:
+
+- Forward find a good outcome
+- Backwards extract lineage and SAT solve
+- Forwards inject failure
+- Repeat
+
+* Kafka Example
+:properties:
+:data-background: img/kafka.jpg
+:end:
+
+- Replicas $\{a, b, c\}$
+- Zookeeper lost $\{b, c\}$
+- Zookeeper replica set $\{a\}$
+- Safe parts unsafe in combination
+
+* MOLLY
+
+- Message failures & Crashes
+- Network partition
+- Failure quiescence (reconnect)
+- Ignore state, data faults
+
+* Forwards Step
+:properties:
+:data-background: img/elixir.jpg
+:class: background-fit
+:end:
+
+- Production programs
+- Interruptable communication
+- e.g.: Erlang, Akka, Java aspects
+- Distributed tracing
+
+* Backward Step
+:properties:
+:data-background: img/icarus.jpg
+:end:
+
+- Dedalus, outputs and dependencies
+
+#+begin_src prolog
+  log(Node, Pload) :- bcast(Node, Pload);
+  node(Node, Neighbor)@next :- node(Node, Neighbor);
+  log(Node, Pload)@next :- log(Node, Pload);
+  log(Node2, Pload)@async :- bcast(Node1, Pload),
+                             node(Node1, Node2);
+#+end_src
+
+#+begin_src prolog
+  missing_log(A, Pl) :- log(X, Pl), node(X, A), notin log(A, Pl);
+  pre(X, Pl) :- log(X, Pl), notin crash(_, X, _);
+  post(X, Pl) :- log(X, Pl), notin missing_log(_, Pl);
+#+end_src
+
+* Fight
+:properties:
+:class: small-figure
+:end:
+
+[[./img/rounds.jpg]]
+
+#+begin_src prolog
+  bcast(N, P)@next :- bcast(N, P);
+#+end_src
+
+#+begin_src prolog
+  bcast(N, P)@next :- log(N, P);
+#+end_src
+
+* Classic Broadcast
+:properties:
+:class: smaller-figure
+:end:
+
+[[./img/round5.jpg]]
+
+#+begin_src fundamental
+  (At a site receiving message m)
+    if message m has not been received already
+      send a copy of m to all other sites [...]
+      deliver m [...]
+#+end_src
+
+* Each Step
+:properties:
+:data-background: img/groundhog-day.jpg
+:end:
+
+- Falsify all supports of the outcome
+- Inject failures
+- If failure, report bug
+- Else add new supports
+- Repeat until no falsification
+
+* Economy
+:properties:
+:data-background: img/scrooge.jpg
+:end:
+
+- Off the shelf SAT solver Z3
+- Off the shelf datalog implemention
+- Rewrite Dedalus $\rightarrow{}$ Datalog
+
+* Rewriting
+
+- Dedalus $\rightarrow{}$ Datalog + =clock=
+- Datalog + =clock= $\rightarrow{}$ =firings=
+- =firings= $\rightarrow{}$ proof trees
+- proof trees $\rightarrow{}$ Conjunctive Normal Form
+  - Disjunctions of message failures and crashes
+  - Conjunction of all disjunctions
+
+[[file:img/rewrite.jpg]]
+
+* 2 Phase Commit
+:properties:
+:class: small-figure
+:end:
+
+[[file:img/2pc.jpg]]
+
+* 3 Phase Commit
+:properties:
+:class: smaller-figure
+:end:
+
+[[file:img/3pc.jpg]]
+
+* Kafka
+:properties:
+:class: small-figure
+:end:
+
+[[file:img/kafka-proof.jpg]]
+
+* Time to Fault
+
+[[file:img/molly.jpg]]
+
+* Time to Coverage
+
+[[file:img/rando.jpg]]
+
+* Future Work
+:properties:
+:data-background: img/sunset.png
+:end:
+
+- Compatible with data generation
+- Assumes programs are internally deterministic
+  - anti-entropy
+  - Randomized consensus
+- Relies on a semi-synchronous model
+  - Unable to demonstrate Paxos termination
+- Dedalus description as software design

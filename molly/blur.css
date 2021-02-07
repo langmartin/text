@@ -1,0 +1,16 @@
+.slide-background-content {
+    filter: blur(3px);
+    opacity: 0.2;
+}
+
+.small-figure img {
+    max-width: 60%;
+}
+
+.smaller-figure img {
+    max-width: 30%;
+}
+
+.background-fit .slide-background-content {
+    background-size: contain;
+}
